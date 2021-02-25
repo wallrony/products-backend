@@ -21,7 +21,7 @@ export async function add(request: Request, response: Response) {
   if (emptyFields.length) {
     return treatResponse(
       response,
-      createApiMessage(`need ${emptyFields.join(', ')} field(s)`),
+      createApiMessage(`need ${emptyFields.join(', ')} field(s)`, 400),
     );
   }
 

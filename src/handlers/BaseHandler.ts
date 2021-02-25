@@ -17,9 +17,9 @@ export function treatResponse<T = unknown>(
 
 export async function execService<T = unknown>(
   serviceFunc: (...args: any) => Promise<IServiceResponse<T>>,
-  ...data: any
+  ...data: any[]
 ): Promise<IApiResponse<T> | IApiMessage> {
-  const result = await serviceFunc(data);
+  const result = await serviceFunc(...data);
 
   let statusCode;
 
