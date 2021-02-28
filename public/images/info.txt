@@ -1,0 +1,1 @@
+Devido à alguns bugs. Em algumas versões do Multer, ele não encontra a pasta /public/images da aplicação caso ela não esteja criada. Por segurança, criei esse arquivo .txt para garantir que a pasta esteja criada no GitHub e para deixar informado desse possível bug.

@@ -20,11 +20,18 @@ export async function add(data: ProductDTO): Promise<boolean> {
 }
 
 export async function update(data: UpdateProductDTO): Promise<boolean> {
+  const dataToUpdate: Record<string, any> = {
+    name: data.name,
+    price: data.price,
+  };
+
+  if (data.image_path) {
+    dataToUpdate['image_path'] = data.image_path
+  }
+
   const result = await connection(tableName)
-    .update({
-      name: data.name,
-      price: data.price
-    }).where('id', '=', data.id);
+    .update(dataToUpdate)
+    .where('id', '=', data.id);
 
   return result !== undefined && result > 0;
 }

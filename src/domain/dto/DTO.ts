@@ -1,3 +1,3 @@
-type DTO = Record<string, string | number>;
+type DTO = Record<string, string | number | undefined>;
 
 export default DTO;

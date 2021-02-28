@@ -1,4 +1,6 @@
 import { Request, Response } from 'express';
+import fs from 'fs';
+
 import { createApiMessage, execService, treatResponse, verifyDTO } from './BaseHandler';
 
 import * as ProductService from '../services/ProductsService';
@@ -13,6 +15,10 @@ export async function findAll(request: Request, response: Response) {
 
 export async function add(request: Request, response: Response) {
   const dto = request.body as ProductDTO;
+
+  if (request.file) {
+    dto.image_path = "http://" + request.hostname + ":3333" + '/images/' + request.file.filename;
+  }
 
   let result;
 
@@ -34,6 +40,10 @@ export async function update(request: Request, response: Response) {
   const paramId = Number(request.params['id']);
   const dto = request.body as UpdateProductDTO;
 
+  if (request.file) {
+    dto.image_path = "http://" + request.hostname + ":3333" + '/images/' + request.file.filename;
+  }
+
   let result;
 
   const emptyFields: string[] = verifyDTO(dto, ['id', 'name', 'price']);
@@ -45,7 +55,7 @@ export async function update(request: Request, response: Response) {
     );
   }
 
-  if (paramId !== dto.id) {
+  if (Number(paramId) !== Number(dto.id)) {
     return treatResponse(
       response,
       createApiMessage(`route and dto ids are diferent, need to be equal`),

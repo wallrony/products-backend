@@ -7,6 +7,7 @@ const server = express();
 
 server.use(express.json());
 server.use(cors());
+server.use(express.static('public'))
 
 server.use('/api/core', CoreRouter)
 
