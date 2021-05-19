@@ -14,7 +14,7 @@ export async function findAll(): Promise<IProduct[]> {
 
 export async function add(data: ProductDTO): Promise<boolean> {
   const result = await connection(tableName)
-    .insert(data);
+    .insert(data).returning('id');
 
   return result && result[0] > 0;
 }
